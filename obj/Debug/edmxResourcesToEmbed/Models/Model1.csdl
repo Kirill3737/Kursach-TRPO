@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="КурсачModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CarDetails">
+    <Key>
+      <PropertyRef Name="id_details" />
+    </Key>
+    <Property Name="id_details" Type="Int32" Nullable="false" />
+    <Property Name="id_mark" Type="Int32" Nullable="false" />
+    <Property Name="detail_articul" Type="Int32" />
+    <Property Name="year_release" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="cost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="kuzov_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarMark" Relationship="Self.FK_CarDetails_CarMark" FromRole="CarDetails" ToRole="CarMark" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_CarDetails" FromRole="CarDetails" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="CarMark">
+    <Key>
+      <PropertyRef Name="id_mark" />
+    </Key>
+    <Property Name="id_mark" Type="Int32" Nullable="false" />
+    <Property Name="mark_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="country_of_origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KPP_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="supply_contract" Type="Boolean" />
+    <NavigationProperty Name="CarDetails" Relationship="Self.FK_CarDetails_CarMark" FromRole="CarMark" ToRole="CarDetails" />
+    <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Klients">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="FIO_client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="passport_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="licience_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="type_of_individual" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="priority_payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Klients" FromRole="Klients" ToRole="Orders" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Klients" FromRole="Klients" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="id_order" />
+    </Key>
+    <Property Name="id_order" Type="Int32" Nullable="false" />
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="id_details" Type="Int32" Nullable="false" />
+    <Property Name="registration_date" Type="DateTime" Precision="0" />
+    <Property Name="id_review" Type="Int32" />
+    <NavigationProperty Name="CarDetails" Relationship="Self.FK_Orders_CarDetails" FromRole="Orders" ToRole="CarDetails" />
+    <NavigationProperty Name="Klients" Relationship="Self.FK_Orders_Klients" FromRole="Orders" ToRole="Klients" />
+    <NavigationProperty Name="Reviews" Relationship="Self.FK_Orders_Reviews" FromRole="Orders" ToRole="Reviews" />
+  </EntityType>
+  <EntityType Name="Reviews">
+    <Key>
+      <PropertyRef Name="id_review" />
+    </Key>
+    <Property Name="id_review" Type="Int32" Nullable="false" />
+    <Property Name="id_order" Type="Int32" Nullable="false" />
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="text_review" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Klients" Relationship="Self.FK_Reviews_Klients" FromRole="Reviews" ToRole="Klients" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Reviews" FromRole="Reviews" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK_CarDetails_CarMark">
+    <End Role="CarMark" Type="Self.CarMark" Multiplicity="1" />
+    <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarMark">
+        <PropertyRef Name="id_mark" />
+      </Principal>
+      <Dependent Role="CarDetails">
+        <PropertyRef Name="id_mark" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_CarDetails">
+    <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarDetails">
+        <PropertyRef Name="id_details" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="id_details" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Klients">
+    <End Role="Klients" Type="Self.Klients" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klients">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reviews_Klients">
+    <End Role="Klients" Type="Self.Klients" Multiplicity="1" />
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klients">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Reviews">
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reviews">
+        <PropertyRef Name="id_review" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="id_review" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="КурсачEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CarDetails" EntityType="Self.CarDetails" />
+    <EntitySet Name="CarMark" EntityType="Self.CarMark" />
+    <EntitySet Name="Klients" EntityType="Self.Klients" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Reviews" EntityType="Self.Reviews" />
+    <AssociationSet Name="FK_CarDetails_CarMark" Association="Self.FK_CarDetails_CarMark">
+      <End Role="CarMark" EntitySet="CarMark" />
+      <End Role="CarDetails" EntitySet="CarDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_CarDetails" Association="Self.FK_Orders_CarDetails">
+      <End Role="CarDetails" EntitySet="CarDetails" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Klients" Association="Self.FK_Orders_Klients">
+      <End Role="Klients" EntitySet="Klients" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reviews_Klients" Association="Self.FK_Reviews_Klients">
+      <End Role="Klients" EntitySet="Klients" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Reviews" Association="Self.FK_Orders_Reviews">
+      <End Role="Reviews" EntitySet="Reviews" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

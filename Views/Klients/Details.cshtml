@@ -1,0 +1,58 @@
+﻿@model Курсач.Models.Klients
+
+@{
+    ViewBag.Title = "Описание";
+}
+
+<h2>Описание</h2>
+
+<div>
+    <h4>Данные о клиенте:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIO_client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passport_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passport_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.licience_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.licience_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type_of_individual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type_of_individual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.priority_payment_method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.priority_payment_method)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.id_client }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

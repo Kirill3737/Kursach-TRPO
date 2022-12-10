@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище КурсачModelContainer" CdmEntityContainer="КурсачEntities">
+    <EntitySetMapping Name="CarDetails">
+      <EntityTypeMapping TypeName="КурсачModel.CarDetails">
+        <MappingFragment StoreEntitySet="CarDetails">
+          <ScalarProperty Name="id_details" ColumnName="id_details" />
+          <ScalarProperty Name="id_mark" ColumnName="id_mark" />
+          <ScalarProperty Name="detail_articul" ColumnName="detail_articul" />
+          <ScalarProperty Name="year_release" ColumnName="year_release" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="kuzov_type" ColumnName="kuzov_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarMark">
+      <EntityTypeMapping TypeName="КурсачModel.CarMark">
+        <MappingFragment StoreEntitySet="CarMark">
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="id_mark" ColumnName="id_mark" />
+          <ScalarProperty Name="mark_name" ColumnName="mark_name" />
+          <ScalarProperty Name="country_of_origin" ColumnName="country_of_origin" />
+          <ScalarProperty Name="KPP_type" ColumnName="KPP_type" />
+          <ScalarProperty Name="supply_contract" ColumnName="supply_contract" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klients">
+      <EntityTypeMapping TypeName="КурсачModel.Klients">
+        <MappingFragment StoreEntitySet="Klients">
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="FIO_client" ColumnName="FIO_client" />
+          <ScalarProperty Name="passport_number" ColumnName="passport_number" />
+          <ScalarProperty Name="licience_number" ColumnName="licience_number" />
+          <ScalarProperty Name="type_of_individual" ColumnName="type_of_individual" />
+          <ScalarProperty Name="priority_payment_method" ColumnName="priority_payment_method" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="КурсачModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="id_order" ColumnName="id_order" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_details" ColumnName="id_details" />
+          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+          <ScalarProperty Name="id_review" ColumnName="id_review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="КурсачModel.Reviews">
+        <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="id_review" ColumnName="id_review" />
+          <ScalarProperty Name="id_order" ColumnName="id_order" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="text_review" ColumnName="text_review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

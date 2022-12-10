@@ -1,0 +1,64 @@
+﻿@model Курсач.Models.CarDetails
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Подтвердите удаление</h2>
+
+<h3>Вы уверенны?</h3>
+<div>
+    <h4>Удалить Товар</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.detail_articul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detail_articul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year_release)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year_release)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kuzov_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kuzov_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarMark.mark_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarMark.mark_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

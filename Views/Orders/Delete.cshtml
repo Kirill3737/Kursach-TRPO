@@ -1,0 +1,56 @@
+﻿@model Курсач.Models.Orders
+
+@{
+    ViewBag.Title = "Удалить Заказ";
+}
+
+<h2>Удаление:</h2>
+
+<h3>Вы уверенны?</h3>
+<div>
+    <h4>Заказ:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.registration_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarDetails.year_release)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarDetails.year_release)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klients.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klients.FIO_client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviews.text_review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviews.text_review)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

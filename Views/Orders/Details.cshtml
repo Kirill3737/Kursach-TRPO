@@ -1,0 +1,50 @@
+﻿@model Курсач.Models.Orders
+
+@{
+    ViewBag.Title = "Описание";
+}
+
+<h2>Описание:</h2>
+
+<div>
+    <h4>Заказ</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.registration_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarDetails.year_release)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarDetails.year_release)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klients.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klients.FIO_client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviews.text_review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviews.text_review)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.id_order }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

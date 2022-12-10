@@ -1,0 +1,42 @@
+﻿@model Курсач.Models.Reviews
+
+@{
+    ViewBag.Title = "Описание";
+}
+
+<h2>Описание:</h2>
+
+<div>
+    <h4>ОТзывы</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_order)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.text_review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.text_review)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klients.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klients.FIO_client)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.id_review }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

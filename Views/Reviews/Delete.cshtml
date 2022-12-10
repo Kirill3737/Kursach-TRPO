@@ -1,0 +1,48 @@
+﻿@model Курсач.Models.Reviews
+
+@{
+    ViewBag.Title = "Удалить отзыв";
+}
+
+<h2>Удалить отзывы:</h2>
+
+<h3>Вы уверенны?</h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_order)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.text_review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.text_review)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klients.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klients.FIO_client)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

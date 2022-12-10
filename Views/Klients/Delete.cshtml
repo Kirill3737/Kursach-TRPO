@@ -1,0 +1,64 @@
+﻿@model Курсач.Models.Klients
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Подтвердите удаление</h2>
+
+<h3>Вы уверенны?</h3>
+<div>
+    <h4>Удалить Клиента:</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIO_client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.passport_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.passport_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.licience_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.licience_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type_of_individual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type_of_individual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.priority_payment_method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.priority_payment_method)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

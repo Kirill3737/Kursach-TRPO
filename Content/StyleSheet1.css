@@ -1,0 +1,12 @@
+﻿body {
+    background-color:aqua;
+    /*background-image:url(../image/1578225824_4-5.jpg); */
+    background:url(../image/1578225824_4-5.jpg) no-repeat center center fixed;
+    background-size:cover;
+ /*   background-clip:border-box;
+    background-position:center;
+    background-size:auto;
+    background-repeat:no-repeat; 
+    background-attachment:fixed;
+    margin-top:0px;*/
+}

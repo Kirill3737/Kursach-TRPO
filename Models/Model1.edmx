@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище КурсачModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarDetails">
+          <Key>
+            <PropertyRef Name="id_details" />
+          </Key>
+          <Property Name="id_details" Type="int" Nullable="false" />
+          <Property Name="id_mark" Type="int" Nullable="false" />
+          <Property Name="detail_articul" Type="int" />
+          <Property Name="year_release" Type="nvarchar" MaxLength="4" />
+          <Property Name="cost" Type="money" />
+          <Property Name="kuzov_type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CarMark">
+          <Key>
+            <PropertyRef Name="id_mark" />
+          </Key>
+          <Property Name="id_mark" Type="int" Nullable="false" />
+          <Property Name="mark_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="country_of_origin" Type="nvarchar" MaxLength="50" />
+          <Property Name="KPP_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="supply_contract" Type="bit" />
+          <Property Name="photo" Type="image" />
+        </EntityType>
+        <EntityType Name="Klients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="FIO_client" Type="nvarchar" MaxLength="50" />
+          <Property Name="passport_number" Type="nvarchar" MaxLength="10" />
+          <Property Name="licience_number" Type="nvarchar" MaxLength="10" />
+          <Property Name="type_of_individual" Type="nvarchar" MaxLength="50" />
+          <Property Name="priority_payment_method" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_details" Type="int" Nullable="false" />
+          <Property Name="registration_date" Type="date" />
+          <Property Name="id_review" Type="int" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="id_review" />
+          </Key>
+          <Property Name="id_review" Type="int" Nullable="false" />
+          <Property Name="id_order" Type="int" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="text_review" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_CarDetails_CarMark">
+          <End Role="CarMark" Type="Self.CarMark" Multiplicity="1" />
+          <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarMark">
+              <PropertyRef Name="id_mark" />
+            </Principal>
+            <Dependent Role="CarDetails">
+              <PropertyRef Name="id_mark" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CarDetails">
+          <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarDetails">
+              <PropertyRef Name="id_details" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Klients">
+          <End Role="Klients" Type="Self.Klients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Reviews">
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviews">
+              <PropertyRef Name="id_review" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_review" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Klients">
+          <End Role="Klients" Type="Self.Klients" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище КурсачModelContainer">
+          <EntitySet Name="CarDetails" EntityType="Self.CarDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarMark" EntityType="Self.CarMark" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klients" EntityType="Self.Klients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CarDetails_CarMark" Association="Self.FK_CarDetails_CarMark">
+            <End Role="CarMark" EntitySet="CarMark" />
+            <End Role="CarDetails" EntitySet="CarDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CarDetails" Association="Self.FK_Orders_CarDetails">
+            <End Role="CarDetails" EntitySet="CarDetails" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Klients" Association="Self.FK_Orders_Klients">
+            <End Role="Klients" EntitySet="Klients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Reviews" Association="Self.FK_Orders_Reviews">
+            <End Role="Reviews" EntitySet="Reviews" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Klients" Association="Self.FK_Reviews_Klients">
+            <End Role="Klients" EntitySet="Klients" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="КурсачModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarDetails">
+          <Key>
+            <PropertyRef Name="id_details" />
+          </Key>
+          <Property Name="id_details" Type="Int32" Nullable="false" />
+          <Property Name="id_mark" Type="Int32" Nullable="false" />
+          <Property Name="detail_articul" Type="Int32" />
+          <Property Name="year_release" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="kuzov_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CarMark" Relationship="Self.FK_CarDetails_CarMark" FromRole="CarDetails" ToRole="CarMark" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_CarDetails" FromRole="CarDetails" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="CarMark">
+          <Key>
+            <PropertyRef Name="id_mark" />
+          </Key>
+          <Property Name="id_mark" Type="Int32" Nullable="false" />
+          <Property Name="mark_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country_of_origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KPP_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="supply_contract" Type="Boolean" />
+          <NavigationProperty Name="CarDetails" Relationship="Self.FK_CarDetails_CarMark" FromRole="CarMark" ToRole="CarDetails" />
+          <Property Name="photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Klients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="FIO_client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="passport_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="licience_number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="type_of_individual" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="priority_payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Klients" FromRole="Klients" ToRole="Orders" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Klients" FromRole="Klients" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_details" Type="Int32" Nullable="false" />
+          <Property Name="registration_date" Type="DateTime" Precision="0" />
+          <Property Name="id_review" Type="Int32" />
+          <NavigationProperty Name="CarDetails" Relationship="Self.FK_Orders_CarDetails" FromRole="Orders" ToRole="CarDetails" />
+          <NavigationProperty Name="Klients" Relationship="Self.FK_Orders_Klients" FromRole="Orders" ToRole="Klients" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Orders_Reviews" FromRole="Orders" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="id_review" />
+          </Key>
+          <Property Name="id_review" Type="Int32" Nullable="false" />
+          <Property Name="id_order" Type="Int32" Nullable="false" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="text_review" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Klients" Relationship="Self.FK_Reviews_Klients" FromRole="Reviews" ToRole="Klients" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Reviews" FromRole="Reviews" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK_CarDetails_CarMark">
+          <End Role="CarMark" Type="Self.CarMark" Multiplicity="1" />
+          <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarMark">
+              <PropertyRef Name="id_mark" />
+            </Principal>
+            <Dependent Role="CarDetails">
+              <PropertyRef Name="id_mark" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CarDetails">
+          <End Role="CarDetails" Type="Self.CarDetails" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarDetails">
+              <PropertyRef Name="id_details" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_details" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Klients">
+          <End Role="Klients" Type="Self.Klients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Klients">
+          <End Role="Klients" Type="Self.Klients" Multiplicity="1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Reviews">
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviews">
+              <PropertyRef Name="id_review" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="id_review" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="КурсачEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarDetails" EntityType="Self.CarDetails" />
+          <EntitySet Name="CarMark" EntityType="Self.CarMark" />
+          <EntitySet Name="Klients" EntityType="Self.Klients" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" />
+          <AssociationSet Name="FK_CarDetails_CarMark" Association="Self.FK_CarDetails_CarMark">
+            <End Role="CarMark" EntitySet="CarMark" />
+            <End Role="CarDetails" EntitySet="CarDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CarDetails" Association="Self.FK_Orders_CarDetails">
+            <End Role="CarDetails" EntitySet="CarDetails" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Klients" Association="Self.FK_Orders_Klients">
+            <End Role="Klients" EntitySet="Klients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Klients" Association="Self.FK_Reviews_Klients">
+            <End Role="Klients" EntitySet="Klients" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Reviews" Association="Self.FK_Orders_Reviews">
+            <End Role="Reviews" EntitySet="Reviews" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище КурсачModelContainer" CdmEntityContainer="КурсачEntities">
+          <EntitySetMapping Name="CarDetails">
+            <EntityTypeMapping TypeName="КурсачModel.CarDetails">
+              <MappingFragment StoreEntitySet="CarDetails">
+                <ScalarProperty Name="id_details" ColumnName="id_details" />
+                <ScalarProperty Name="id_mark" ColumnName="id_mark" />
+                <ScalarProperty Name="detail_articul" ColumnName="detail_articul" />
+                <ScalarProperty Name="year_release" ColumnName="year_release" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="kuzov_type" ColumnName="kuzov_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarMark">
+            <EntityTypeMapping TypeName="КурсачModel.CarMark">
+              <MappingFragment StoreEntitySet="CarMark">
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="id_mark" ColumnName="id_mark" />
+                <ScalarProperty Name="mark_name" ColumnName="mark_name" />
+                <ScalarProperty Name="country_of_origin" ColumnName="country_of_origin" />
+                <ScalarProperty Name="KPP_type" ColumnName="KPP_type" />
+                <ScalarProperty Name="supply_contract" ColumnName="supply_contract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klients">
+            <EntityTypeMapping TypeName="КурсачModel.Klients">
+              <MappingFragment StoreEntitySet="Klients">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="FIO_client" ColumnName="FIO_client" />
+                <ScalarProperty Name="passport_number" ColumnName="passport_number" />
+                <ScalarProperty Name="licience_number" ColumnName="licience_number" />
+                <ScalarProperty Name="type_of_individual" ColumnName="type_of_individual" />
+                <ScalarProperty Name="priority_payment_method" ColumnName="priority_payment_method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="КурсачModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_details" ColumnName="id_details" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+                <ScalarProperty Name="id_review" ColumnName="id_review" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="КурсачModel.Reviews">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="id_review" ColumnName="id_review" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="text_review" ColumnName="text_review" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

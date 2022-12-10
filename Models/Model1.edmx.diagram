@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e605b95c95094b28976ac039d7945bbc" Name="Diagram1" ZoomLevel="84">
+        <EntityTypeShape EntityType="КурсачModel.CarDetails" Width="1.5" PointX="3.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="КурсачModel.CarMark" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="КурсачModel.Klients" Width="1.5" PointX="7.375" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="КурсачModel.Orders" Width="1.5" PointX="3.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="КурсачModel.Reviews" Width="1.5" PointX="6.125" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="КурсачModel.FK_CarDetails_CarMark" ManuallyRouted="false" />
+        <AssociationConnector Association="КурсачModel.FK_Orders_CarDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="КурсачModel.FK_Orders_Klients" ManuallyRouted="false" />
+        <AssociationConnector Association="КурсачModel.FK_Reviews_Klients" ManuallyRouted="false" />
+        <AssociationConnector Association="КурсачModel.FK_Orders_Reviews" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

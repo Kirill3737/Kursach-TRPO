@@ -1,0 +1,75 @@
+﻿@model Курсач.Models.CarMark
+
+@{
+    ViewBag.Title = "Описание";
+}
+
+<h2>Описание</h2>
+
+<div>
+    <h4>Информация об Авто</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mark_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mark_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.country_of_origin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country_of_origin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KPP_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KPP_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.supply_contract)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.supply_contract)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.photo)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.photo)*@
+
+
+            @{ var item = Model;
+                byte[] photo = item.photo;
+                string imageSrc = null;
+                if (photo != null)
+                {
+                    MemoryStream ms = new MemoryStream();
+                    ms.Write(photo, 0, photo.Length);
+                    string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                    imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                    string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                }
+            }
+
+            <img src="@imageSrc" alt="Image" width="150" height="100" />
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.id_mark }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

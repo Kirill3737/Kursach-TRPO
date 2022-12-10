@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SKS</title>
+    @*<link href="@Url.Content("~/css/style.css")" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<style>
+    body {
+        background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://abiznews.net/wp-content/uploads/2022/04/musor2.jpg") no-repeat center center fixed;
+        background-size: cover;
+        background-color: #00000087;
+        background-blend-mode: multiply;
+        backdrop-filter: blur(3px); /*размытие*/
+    }
+
+    .jumbotron {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        color: inherit;
+        /*background-color: #00000087;*/
+        background: rgb(85, 85,85);
+        margin-top: 20px;
+        opacity: 0.7;
+    }
+
+    .navbar-inverse {
+        background-color: #333333;
+        border-color: #080808;
+        opacity: 0.8;
+    }
+
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #d9edf7;
+        background-color: #fff;
+    }
+
+    a {
+        color: #ddd;
+        text-decoration: none;
+    }
+
+    button, html input[type="button"], input[type="reset"], input[type="submit"] {
+        -webkit-appearance: button;
+        cursor: pointer;
+        background-color: black;
+    }
+
+    input[type="submit"] {
+        -webkit-appearance: button;
+        cursor: pointer;
+        background: black;
+    }
+
+    .ButtonEnter {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn .btn-primary .btn-lg {
+        transition: linear 0.25s;
+    }
+
+    .nav_element:hover {
+        text-decoration: underline;
+    }
+
+    .slider {
+        width: 100%;
+        height: 600px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .slidePNG {
+        display: block;
+        animation: slider 24s infinite;
+        animation-delay: 5s;
+        position: relative;
+        z-index: 0;
+        transform: translateY(-1080px);
+    }
+
+    @@keyframes slider {
+        0% {
+            transform: translateY(-1080px);
+        }
+
+        50% {
+            transform: translateY(0);
+        }
+
+        75% {
+            transform: translateY(-1080px);
+        }
+    }
+
+    .blocked {
+        background: rgb(85, 85, 85);
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 15px;
+    }
+
+    a {
+        transition: linear 0.25s;
+        color: #ddd;
+        text-decoration: none;
+    }
+</style>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("SamoilovCorpServises", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>*@
+                    <li>@Html.ActionLink("Каталог Товаров", "Index", "CarDetails")</li>
+                    <li>@Html.ActionLink("Марки Автомобилей", "Index", "CarMarks")</li>
+                    <li>@Html.ActionLink("Наши Клиенты", "Index", "Klients")</li>
+                    <li>@Html.ActionLink("Заказы", "Index", "Orders")</li>
+                    <li>@Html.ActionLink("Отзывы", "Index", "Reviews")</li>
+                    <li>@Html.ActionLink("Сделать Заказ", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Информация", "About", "Home")</li>
+                        <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - SamoilovCorpServises</p>
+        </footer>
+    </div>
+    @*<a href="http://www.google.com"><img src="~/image/1578225824_4-5.jpg" /></a>*@  @* Добавление изображения, корявая хрень*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
